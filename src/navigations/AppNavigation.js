@@ -1,3 +1,5 @@
+import {StatusBar, Platform} from 'react-native';
+
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {ROUTES} from '../components/configs';
@@ -5,6 +7,12 @@ import {ROUTES} from '../components/configs';
 import Login from '../screens/auth/Login';
 import Duedate from '../screens/Duedate';
 import Home from '../screens/Home';
+import Header from '../components/layouts/Header';
+
+const statusBarHeight =
+  Platform.OS === 'android'
+    ? StatusBar.currentHeight || (Platform.Version < 23 ? 25 : 33)
+    : 0;
 
 const AuthStack = createStackNavigator();
 const Auth = () => {
@@ -28,6 +36,10 @@ const Main = () => {
       initialRouteName={ROUTES.HOME}
       screenOptions={{
         headerShown: false,
+        headerStyle: {
+          paddingTop: statusBarHeight,
+          height: 1 + statusBarHeight,
+        },
       }}>
       <MainStack.Screen name={ROUTES.HOME} component={Home} />
       <MainStack.Screen
@@ -41,8 +53,10 @@ const Main = () => {
 
 export default () => {
   return (
-    <NavigationContainer>
-      <Duedate />
-    </NavigationContainer>
+    <>
+      <NavigationContainer>
+        <Duedate />
+      </NavigationContainer>
+    </>
   );
 };

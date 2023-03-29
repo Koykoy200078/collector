@@ -1,4 +1,4 @@
 import ROUTES from './routes';
 import COLORS from './colors';
-
-export {ROUTES, COLORS};
+import IMAGES from './images';
+export {ROUTES, COLORS, IMAGES};
