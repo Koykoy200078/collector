@@ -4,4 +4,5 @@ export default {
 
   HOME: 'Home',
   DUE_DATE: 'Due-date Account',
+  MISSBILL: 'Missbill',
 };

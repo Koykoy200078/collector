@@ -8,6 +8,7 @@ import Login from '../screens/auth/Login';
 import Duedate from '../screens/Duedate';
 import Home from '../screens/Home';
 import Header from '../components/layouts/Header';
+import MissedBills from '../screens/MissedBills';
 
 const statusBarHeight =
   Platform.OS === 'android'
@@ -47,6 +48,11 @@ const Main = () => {
         component={Duedate}
         options={{presentation: 'modal'}}
       />
+      <MainStack.Screen
+        name={ROUTES.MISSBILL}
+        component={MissedBills}
+        options={{presentation: 'modal'}}
+      />
     </MainStack.Navigator>
   );
 };
@@ -55,7 +61,7 @@ export default () => {
   return (
     <>
       <NavigationContainer>
-        <Duedate />
+        <Main />
       </NavigationContainer>
     </>
   );

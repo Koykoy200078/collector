@@ -17,9 +17,8 @@ import FlashList from '@shopify/flash-list/dist/FlashList';
 import moment from 'moment';
 
 export default function ({navigation, route}) {
-  const {aa} = route.params;
+  const {missedcount} = route.params;
   const [viewAccount, setViewAccount] = useState(false);
-  const [zz, setZz] = useState();
 
   const date = moment().format('DD MMMM YYYY');
 
@@ -30,6 +29,7 @@ export default function ({navigation, route}) {
   } = useForm({
     defaultValues: {
       pay: '',
+      password: '',
     },
   });
 
@@ -37,16 +37,12 @@ export default function ({navigation, route}) {
     return (
       <ModalPopup
         visible={viewAccount}
-        modalStyle="w-[90%] h-fit rounded-md bg-white z-20">
-        <View className="w-fit h-[270]">
+        modalStyle="w-[90%] max-h-[65%] rounded-md bg-white z-20">
+        <View className="h-fit w-fit">
           <View className="flex-row h-[30] items-center justify-between">
             <View />
             <View className="justify-between items-end mr-2">
-              <TouchableOpacity
-                onPress={() => {
-                  setZz('');
-                  setViewAccount(false);
-                }}>
+              <TouchableOpacity onPress={() => setViewAccount(false)}>
                 <Icon name="times" size={23} color="#000" />
               </TouchableOpacity>
             </View>
@@ -54,61 +50,53 @@ export default function ({navigation, route}) {
 
           <View className="w-fit h-fit items-start justify-center p-1">
             <View className="flex-row p-1">
-              <View className="w-[40%]">
-                <Text className="flex-shrink font-bold text-black">Name</Text>
+              <View className="w-[37%]">
+                <Text className="flex-shrink font-bold">Name</Text>
               </View>
               <View>
-                <Text className="flex-shrink">{zz?.name}</Text>
+                <Text className="flex-shrink">Christian Franc M. Carvajal</Text>
               </View>
             </View>
             <View className="flex-row p-1">
-              <View className="w-[40%]">
-                <Text className="flex-shrink font-bold text-black">
-                  Address
-                </Text>
+              <View className="w-[37%]">
+                <Text className="flex-shrink font-bold">Address</Text>
               </View>
               <View>
-                <Text className="flex-shrink w-[185]">{zz?.address}</Text>
+                <Text className="flex-shrink">
+                  6214, Guihulngan City Neg. Or.
+                </Text>
               </View>
             </View>
             <View className="flex-row p-1">
-              <View className="w-[40%]">
-                <Text className="flex-shrink font-bold text-black">
-                  Due-date
-                </Text>
+              <View className="w-[37%]">
+                <Text className="flex-shrink font-bold">Due-date</Text>
               </View>
               <View>
-                <Text className="flex-shrink">{zz?.due}</Text>
+                <Text className="flex-shrink">28 March 2023</Text>
               </View>
             </View>
             <View className="flex-row p-1">
-              <View className="w-[40%]">
-                <Text className="flex-shrink font-bold text-black">
-                  Unpaid balance
-                </Text>
+              <View className="w-[37%]">
+                <Text className="flex-shrink font-bold">Unpaid balance</Text>
               </View>
               <View>
-                <Text className="flex-shrink">₱ {zz?.unpaid}</Text>
+                <Text className="flex-shrink">₱ 1,000,000,000</Text>
               </View>
             </View>
             <View className="flex-row p-1">
-              <View className="w-[40%]">
-                <Text className="flex-shrink font-bold text-black">
-                  Penalty balance
-                </Text>
+              <View className="w-[37%]">
+                <Text className="flex-shrink font-bold">Penalty balance</Text>
               </View>
               <View>
-                <Text className="flex-shrink">₱ {zz?.penalty}</Text>
+                <Text className="flex-shrink">₱ 100</Text>
               </View>
             </View>
             <View className="flex-row p-1">
-              <View className="w-[40%]">
-                <Text className="flex-shrink font-bold text-black">
-                  Total balance
-                </Text>
+              <View className="w-[37%]">
+                <Text className="flex-shrink font-bold">Total balance</Text>
               </View>
               <View>
-                <Text className="flex-shrink">₱ {zz?.total}</Text>
+                <Text className="flex-shrink">₱ 1,000,000,100</Text>
               </View>
             </View>
           </View>
@@ -118,7 +106,7 @@ export default function ({navigation, route}) {
               <TextInput placeholder="100" className="w-full h-full border-b" />
             </View>
 
-            <TouchableOpacity>
+            <TouchableOpacity className="mt-3">
               <View className="w-[100%] items-center justify-center bg-blue-600 p-2 rounded-md">
                 <Text className="text-base font-bold text-white w-[100] text-center">
                   Pay
@@ -179,12 +167,7 @@ export default function ({navigation, route}) {
             </Text>
           </View>
         </View>
-        <TouchableOpacity
-          className="w-[40%] items-center justify-center ml-[7] border-l-2 border-black"
-          onPress={() => {
-            setZz(item);
-            setViewAccount(true);
-          }}>
+        <TouchableOpacity className="w-[40%] items-center justify-center ml-[7] border-l-2 border-black">
           <View>
             <Text className="text-base text-black font-bold flex-shrink">
               ₱ {item.total}
@@ -197,7 +180,7 @@ export default function ({navigation, route}) {
   return (
     <SafeAreaView className="w-full h-full bg-[#003D90] p-2">
       <FlashList
-        data={aa}
+        data={missedcount}
         ListHeaderComponent={renderHeader}
         renderItem={renderItem}
         keyExtractor={item => item.id}

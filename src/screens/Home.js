@@ -4,27 +4,66 @@ import Header from '../components/layouts/Header';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {IMAGES, ROUTES} from '../components/configs';
 import Cards from '../components/layouts/Cards';
+import moment from 'moment';
 
 export default function ({navigation}) {
+  const date = moment().format('DD MMMM YYYY');
+
   const aa = [
     {
       id: 1,
-      title: 'AaA',
+      name: 'Christian Franc M. Carvajal',
+      address: '6214, Guihulngan City, Negros Oriental',
+      due: '28 March 2023',
+      unpaid: '1,000',
+      penalty: '100',
+      total: '1,100',
     },
     {
       id: 2,
-      title: 'BbB',
+      name: 'Koykoy200078',
+      address: '6214, Guihulngan City, Negros Oriental',
+      due: '30 March 2023',
+      unpaid: '1,000',
+      penalty: '10',
+      total: '1,100',
     },
     {
       id: 3,
-      title: 'CcC',
+      name: 'Cristian',
+      address: '6214, Guihulngan City, Negros Oriental',
+      due: '1 February 2023',
+      unpaid: '10,000',
+      penalty: '15',
+      total: '10,015',
     },
     {
       id: 4,
-      title: 'DdD',
+      name: 'CrisTian',
+      address: '6214, Guihulngan City, Negros Oriental',
+      due: '7 April 2023',
+      unpaid: '100',
+      penalty: '1',
+      total: '101',
+    },
+    {
+      id: 5,
+      name: 'Cris',
+      address: '6214, Guihulngan City, Negros Oriental',
+      due: '7 October 2023',
+      unpaid: '100',
+      penalty: '1',
+      total: '101',
     },
   ];
   const slicedData = aa.slice(0, 3);
+
+  const missedcount = aa.filter(item => {
+    const dueDate = item.due;
+    return date >= dueDate;
+  });
+
+  const length = missedcount.length;
 
   return (
     <View className="w-full h-full bg-[#003D90]">
@@ -32,7 +71,8 @@ export default function ({navigation}) {
         <Header />
       </View>
 
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate(ROUTES.MISSBILL, {missedcount})}>
         <View className="w-full h-[45] p-2 flex-row items-center justify-center">
           <Image
             source={{
@@ -44,7 +84,7 @@ export default function ({navigation}) {
 
           <View className="w-[85%]">
             <Text className="ml-1 text-base font-bold text-center text-white">
-              You have 1 missed bills, review here.
+              You have {length} missed bills, review here.
             </Text>
           </View>
         </View>
@@ -57,7 +97,7 @@ export default function ({navigation}) {
             name="Due-date Accounts"
             buttonLabel="View More"
             data={slicedData}
-            onPress={() => navigation.navigate(ROUTES.DUE_DATE)}
+            onPress={() => navigation.navigate(ROUTES.DUE_DATE, {aa})}
           />
 
           <Cards
@@ -65,7 +105,7 @@ export default function ({navigation}) {
             name="Unpaid Balance Accounts"
             buttonLabel="View More"
             data={slicedData}
-            onPress={() => navigation.navigate(ROUTES.DUE_DATE)}
+            onPress={() => navigation.navigate(ROUTES.DUE_DATE, {aa})}
           />
         </ScrollView>
       </View>

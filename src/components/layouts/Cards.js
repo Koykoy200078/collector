@@ -5,13 +5,12 @@ import {FlashList} from '@shopify/flash-list';
 
 export default function ({logo, name, address, buttonLabel, onPress, data}) {
   const renderItem = ({item}) => {
-    console.log('item ==> ', item);
     return (
       <View className="mt-1 w-full h-fit">
-        <TouchableOpacity onPress={() => console.log(item.title)}>
+        <TouchableOpacity onPress={() => console.log(item.name)}>
           <View className="rounded-md p-1 mt-1 flex-row items-center justify-between w-full">
             <View className="items-start justify-center">
-              <Text className="text-base font-bold">{item.title}</Text>
+              <Text className="text-base font-bold">{item.name}</Text>
             </View>
 
             <View className="items-end justify-center">
